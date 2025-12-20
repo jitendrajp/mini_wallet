@@ -6,24 +6,6 @@ This README provides full setup instructions, environment configuration details 
 
 ---
 
-# Demo
-
-**URL:**  
-http://13.61.248.128
-
-## Credentials
-
-### User A
-- **Email:** user.alpha@demo.app  
-- **Password:** mini@Wallet025
-
-### User B
-- **Email:** user.beta@demo.app  
-- **Password:** mini@Wallet025
-
-
----
-
 ## Features
 - User Authentication (Login, User registration with email verification, Forgot Password, Logout)
 - Balance Management (Add Balance)
@@ -31,6 +13,47 @@ http://13.61.248.128
 - Redis Queue Support
 - JWT Authentication
 - Pusher Integration
+
+---
+
+# Demo
+
+**URL:**  
+http://13.61.248.128
+
+## Credentials
+
+### User Alpha
+- **Email:** user.alpha@demo.app  
+- **Password:** mini@Wallet025
+
+### User Beta
+- **Email:** user.beta@demo.app  
+- **Password:** mini@Wallet025
+
+### User Gamma
+- **Email:** user.gamma@demo.app  
+- **Password:** mini@Wallet025
+
+## How to Test (Quick Guide)
+
+1. **Login as User Alpha**  
+   → Verify dashboard loads and wallet balance is visible.
+
+2. **Send funds to User Beta**  
+   → Confirm transaction is created and balance is reduced.
+
+3. **Logout and login as User Beta**  
+   → Verify incoming transaction and updated balance.
+
+4. **Send funds back to User Alpha**  
+   → Confirms bi-directional (peer-to-peer) transfers.
+
+5. **Login as User Gamma**  
+   → Use this account to test:
+   - Multiple incoming transactions
+   - Transaction history listing
+   - Edge cases (low balance, validation errors)
 
 ---
 
@@ -81,11 +104,5 @@ npm run dev   # development
 npm run build # production
 ```
 
-## How to Test
-- Create two users and verify email
-- Login each user in a different browser
-- Add Balance to each user
-- Send Money each user using the recipient's user ID (primary key of users table)
-- After the transaction, you can see the data update in real-time via Pusher
 
 Cheers!
