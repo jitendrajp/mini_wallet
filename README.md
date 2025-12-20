@@ -6,6 +6,24 @@ This README provides full setup instructions, environment configuration details 
 
 ---
 
+# Demo
+
+**URL:**  
+http://13.61.248.128
+
+## Credentials
+
+### User A
+- **Email:** user.alpha@demo.app  
+- **Password:** mini@Wallet025
+
+### User B
+- **Email:** user.beta@demo.app  
+- **Password:** mini@Wallet025
+
+
+---
+
 ## Features
 - User Authentication (Login, User registration with email verification, Forgot Password, Logout)
 - Balance Management (Add Balance)
