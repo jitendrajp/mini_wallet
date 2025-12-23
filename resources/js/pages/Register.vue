@@ -31,8 +31,8 @@ const email = ref('');
 const password = ref('');
 const password_confirmation = ref('');
 const router = useRouter();
-const errors = ref({})
-let loading = ref(false)
+const errors = ref({});
+let loading = ref(false);
 
 async function submit() {
     errors.value = {};

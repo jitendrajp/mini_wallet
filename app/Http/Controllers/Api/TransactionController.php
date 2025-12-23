@@ -33,9 +33,9 @@ class TransactionController extends Controller
             'receiver_id' => 'required|integer|exists:users,id|not_in:' . auth('api')->id(),
             'amount' => 'required|numeric|min:0.01',
         ], [
-            'receiver_id.required' => 'Please enter recipient\'s ID',
-            'receiver_id.integer' => 'Invalid recipient\'s ID',
-            'receiver_id.exists' => 'Recipient\'s ID does not exist',
+            'receiver_id.required' => 'Please select Recipient User',
+            'receiver_id.integer' => 'Invalid Recipient User',
+            'receiver_id.exists' => 'Recipient does not exist',
             'receiver_id.not_in' => 'You cannot send money to yourself',
             'amount.required' => 'Please enter an amount',
             'amount.numeric' => 'Amount must be a number',

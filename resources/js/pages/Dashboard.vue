@@ -69,9 +69,9 @@ async function load(pageNumber = 1) {
         }
         page.value = res.data.transactions.current_page;
         lastPage.value = res.data.transactions.last_page;
-        loading.value = false
+        loading.value = false;
     } catch (e) {
-        loading.value = false
+        loading.value = false;
         console.error(e);
     }
 }
@@ -104,7 +104,7 @@ onMounted(async () => {
         echo = makeEcho(token);
         window.Echo = echo;
         echo.private(`user.${me.id}`).listen('TransactionCompleted', (e) => {
-            if (e.transaction) {
+            /*if (e.transaction) {
                 transactions.value.unshift(e.transaction);
                 if (e.transaction.sender_id === me.id) {
                     balance.value = (parseFloat(balance.value) -
@@ -114,7 +114,7 @@ onMounted(async () => {
                     balance.value = (parseFloat(balance.value) +
                         parseFloat(e.transaction.amount)).toFixed(2);
                 }
-            }
+            }*/
         }).error((err) => {
             console.error("Channel subscription error:", err);
         });

@@ -15,8 +15,18 @@ class AuthController extends Controller
     {
         $user = auth('api')->user();
         $users = User::where('id', '!=', $user->id)
-            ->orderBy('name', 'asc')
-            ->get();
+            ->orderBy('name', 'asc');
+
+        if ($request->filled('q')) {
+            $search = $request->q;
+
+            $users->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            })->limit(10);
+        }
+
+        $users = $users->get();
 
         return response()->json($users);
     }
