@@ -92,6 +92,10 @@ function loadMore() {
     }
 }
 
+function hasTransaction(id) {
+    return transactions.value.some(t => t.id === id);
+}
+
 onMounted(async () => {
     const token = localStorage.getItem('token');
     userloading.value = true
@@ -104,8 +108,13 @@ onMounted(async () => {
         echo = makeEcho(token);
         window.Echo = echo;
         echo.private(`user.${me.id}`).listen('TransactionCompleted', (e) => {
-            /*if (e.transaction) {
-                transactions.value.unshift(e.transaction);
+            if (e.transaction) {
+                const tx = e.transaction;
+                if (!tx) return;
+
+                if (hasTransaction(tx.id)) return;
+
+                transactions.value.unshift(tx);
                 if (e.transaction.sender_id === me.id) {
                     balance.value = (parseFloat(balance.value) -
                         parseFloat(e.transaction.amount) -
@@ -114,7 +123,7 @@ onMounted(async () => {
                     balance.value = (parseFloat(balance.value) +
                         parseFloat(e.transaction.amount)).toFixed(2);
                 }
-            }*/
+            }
         }).error((err) => {
             console.error("Channel subscription error:", err);
         });
