@@ -1,41 +1,81 @@
 <template>
-    <div class="max-w-4xl mx-auto p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl">Dashboard</h1>
-            <div>
-                <button class="px-3 py-1 bg-red-500 text-white rounded" @click="logout">Logout</button>
-            </div>
-        </div>
+    <div class="min-h-screen bg-slate-50">
+        <div class="max-w-5xl mx-auto px-6 py-6">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-2xl font-semibold text-slate-900">Dashboard</h1>
+                    <p class="text-sm text-slate-500">
+                        Welcome back, {{ user?.name }}
+                    </p>
+                </div>
 
-        <div class="mb-4">Welcome {{ user?.name }}</div>
-        <template v-if="userloading"></template>
-        <template v-else>
-        <template v-if="user?.email_verified_at">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div class="col-span-2 bg-white p-4 rounded shadow">
-                    <h2 class="text-lg">Balance</h2>
-                    <p class="text-3xl mt-2">${{ balance }}</p>
-                    <add-balance @done="refresh" v-if="balance <= 1000"></add-balance>
-                </div>
-                <div class="bg-white p-4 rounded shadow">
-                    <transfer-form @done="refresh"/>
-                </div>
+                <button class="rounded-md bg-red-500
+                           from-red-600 to-red-700
+                           px-4 py-2 text-sm font-medium
+                           text-white shadow-md transition
+                           hover:opacity-95 disabled:opacity-60"
+                        @click="logout">
+                    Logout
+                </button>
             </div>
-            <div class="bg-white p-4 rounded shadow">
-                <transactions-list :transactions="transactions" :user="user"/>
-                <div v-if="page < lastPage" class="mt-4 flex justify-center">
-                    <button
-                        class="px-4 py-2 bg-blue-600 text-white rounded"
-                        @click="loadMore" :disabled="loading">{{ loading ? "Please wait..." : "Load More" }}
-                    </button>
-                </div>
-            </div>
-        </template>
-        <alert v-else :show-close="false"
-               message="We have sent an email for verification. Please verify your email first to access Mini Wallet!"
-               type="warning">
-        </alert>
-        </template>
+
+            <template v-if="userLoading"></template>
+
+            <template v-else>
+                <template v-if="user?.email_verified_at">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="md:col-span-2 rounded-md bg-white p-6 shadow">
+                            <h2 class="text-sm font-medium text-slate-500">
+                                Current balance
+                            </h2>
+
+                            <p class="mt-2 text-3xl font-semibold text-slate-900">
+                                ${{ balance }}
+                            </p>
+
+                            <div class="mt-4">
+                                <add-balance v-if="balance <= 1000" @done="refresh"/>
+                            </div>
+                        </div>
+
+                        <div class="rounded-md bg-white p-6 shadow">
+                            <h2 class="text-sm font-medium text-slate-500 mb-3">
+                                Quick transfer
+                            </h2>
+                            <transfer-form @done="refresh"/>
+                        </div>
+                    </div>
+
+                    <div class="rounded-md bg-white p-6 shadow">
+                        <h2 class="mb-4 text-lg font-semibold text-slate-900">
+                            Recent transactions
+                        </h2>
+
+                        <transactions-list :transactions="transactions" :user="user"/>
+
+                        <div v-if="page < lastPage" class="mt-6 flex justify-center">
+                            <button
+                                :disabled="loading"
+                                class="rounded-md bg-gradient-to-r
+                           from-blue-600 to-blue-700
+                           px-4 py-2 text-sm font-medium
+                           text-white shadow-md transition
+                           hover:opacity-95 disabled:opacity-60"
+                                @click="loadMore">
+                                {{ loading ? "Loading..." : "Load more" }}
+                            </button>
+                        </div>
+                    </div>
+                </template>
+
+                <alert
+                    v-else
+                    :show-close="false"
+                    message="We have sent a verification email. Please verify your email to access Mini Wallet."
+                    type="warning"
+                />
+            </template>
+        </div>
     </div>
 </template>
 
@@ -54,11 +94,11 @@ let echo = null;
 let user = ref({});
 const page = ref(1);
 const lastPage = ref(1);
-let loading = ref(false)
-let userloading = ref(false)
+let loading = ref(false);
+let userLoading = ref(false);
 
 async function load(pageNumber = 1) {
-    loading.value = true
+    loading.value = true;
     try {
         const res = await api.get(`/transactions?page=${pageNumber}`);
         balance.value = res.data.balance;
@@ -98,10 +138,10 @@ function hasTransaction(id) {
 
 onMounted(async () => {
     const token = localStorage.getItem('token');
-    userloading.value = true
+    userLoading.value = true;
     const me = (await api.get('/me')).data;
-    user.value = me
-    userloading.value = false
+    user.value = me;
+    userLoading.value = false;
     await load();
 
     if (token) {
@@ -128,5 +168,5 @@ onMounted(async () => {
             console.error("Channel subscription error:", err);
         });
     }
-});
+})
 </script>

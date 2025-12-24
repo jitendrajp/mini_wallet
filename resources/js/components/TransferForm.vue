@@ -1,43 +1,74 @@
 <template>
     <div>
-        <h3 class="font-medium mb-2">Send Money</h3>
-        <alert v-if="success" :message="success" type="success"/>
-        <alert v-if="error" :message="error" type="error"/>
-        <form class="space-y-2" @submit.prevent="submit">
+        <h3 class="mb-3 text-sm font-semibold text-slate-900">
+            Send money
+        </h3>
+
+        <alert v-if="success" :message="success" class="mb-3" type="success"/>
+        <alert v-if="error" :message="error" class="mb-3" type="error"/>
+
+        <form class="space-y-4" @submit.prevent="submit">
             <div class="relative">
+                <label class="mb-1 block text-xs font-medium text-slate-500">
+                    Recipient
+                </label>
+
                 <input
                     v-model="search"
                     autocomplete="off"
-                    class="w-full p-2 border rounded"
-                    placeholder="Search Recipient User"
-                    @input="searchUsers"
-                />
+                    class="w-full rounded-md border border-slate-300 bg-slate-50
+                           px-3 py-2 text-sm
+                           focus:border-blue-600 focus:ring-4
+                           focus:ring-blue-600/20 outline-none"
+                    placeholder="Search by name or email"
+                    @input="searchUsers"/>
 
                 <ul
                     v-if="users.length"
-                    class="absolute z-10 w-full bg-white border rounded max-h-48 overflow-auto"
-                >
-                    <li
-                        v-for="user in users"
-                        :key="user.id"
-                        class="p-2 cursor-pointer hover:bg-gray-100"
-                        @click="selectUser(user)"
-                    >
-                        {{ user.name }} <span class="text-gray-400">{{ user.email }}</span>
+                    class="absolute z-20 mt-1 max-h-52 w-full overflow-auto rounded-md border border-slate-200 bg-white shadow-lg">
+                    <li v-for="user in users" :key="user.id" class="cursor-pointer px-3 py-2 text-sm hover:bg-slate-50"
+                        @click="selectUser(user)">
+                        <div class="font-medium text-slate-900">
+                            {{ user.name }}
+                        </div>
+                        <div class="text-xs text-slate-500">
+                            {{ user.email }}
+                        </div>
                     </li>
                 </ul>
             </div>
 
             <input :value="receiver_id" type="hidden"/>
-            <input v-model="amount" class="w-full p-2 border rounded" placeholder="Enter Amount" step="0.01"
-                   type="number"/>
+
+            <div>
+                <label class="mb-1 block text-xs font-medium text-slate-500">
+                    Amount
+                </label>
+
+                <input
+                    v-model="amount"
+                    class="w-full rounded-md border border-slate-300 bg-slate-50
+                           px-3 py-2 text-sm
+                           focus:border-blue-600 focus:ring-4
+                           focus:ring-blue-600/20 outline-none"
+                    placeholder="0.00"
+                    step="0.01"
+                    type="number"/>
+            </div>
+
             <div class="flex justify-end">
-                <button :disabled="loading" class="px-3 py-1 bg-blue-600 text-white rounded">
-                    {{ loading ? "Please wait..." : "Send" }}
+                <button :disabled="loading || !receiver_id || !amount"
+                        class="rounded-md bg-gradient-to-r
+                           from-blue-600 to-blue-700
+                           px-4 py-2 text-sm font-medium
+                           text-white shadow-md transition
+                           hover:opacity-95 disabled:opacity-60">
+                    {{ loading ? "Sending..." : "Send money" }}
                 </button>
             </div>
         </form>
     </div>
+
 </template>
 
 <script setup>
@@ -60,7 +91,7 @@ const searchUsers = async () => {
         return;
     }
 
-    const res = await api.get('/users', { params: {q: search.value} });
+    const res = await api.get('/users', {params: {q: search.value}});
     users.value = res.data;
 }
 

@@ -1,12 +1,29 @@
 <template>
-    <div class="mt-5 w-half">
-        <alert v-if="success" :message="success" type="success"/>
-        <alert v-if="error" :message="error" type="error"/>
-        <form class="space-y-2" @submit.prevent="submit">
-            <input v-model="amount" class="w-half p-2 border rounded" placeholder="Enter Amount" step="0.01"
-                   type="number"/>
-            <button :disabled="loading" class="px-3 py-2 bg-blue-600 xl text-white rounded ml-2">
-                {{ loading ? "Please wait..." : "Add Balance" }}
+    <div class="mt-6 max-w-sm">
+        <alert v-if="success" :message="success" class="mb-3" type="success"/>
+        <alert v-if="error" :message="error" class="mb-3" type="error"/>
+
+        <form class="flex items-end gap-3" @submit.prevent="submit">
+            <div class="flex-1">
+                <label class="mb-1 block text-xs font-medium text-slate-500">
+                    Amount
+                </label>
+                <input
+                    v-model="amount"
+                    class="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm focus:border-blue-600 focus:ring-4 focus:ring-blue-600/20 outline-none"
+                    placeholder="0.00"
+                    step="0.01"
+                    type="number"
+                />
+            </div>
+
+            <button :disabled="loading || !amount"
+                    class="rounded-md bg-gradient-to-r
+                           from-blue-600 to-blue-700
+                           px-4 py-2 text-sm font-medium
+                           text-white shadow-md transition
+                           hover:opacity-95 disabled:opacity-60">
+                {{ loading ? "Adding..." : "Add balance" }}
             </button>
         </form>
     </div>

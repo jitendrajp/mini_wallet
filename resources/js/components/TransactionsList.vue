@@ -1,35 +1,42 @@
 <template>
     <div>
-        <h3 class="font-medium mb-4 text-lg">Transactions</h3>
-
-        <div v-if="transactions.length === 0" class="text-sm text-gray-500">
-            No transactions yet.
+        <div v-if="transactions.length === 0" class="rounded-md border border-dashed border-slate-300
+           py-8 text-center text-sm text-slate-500">
+            No transactions yet
         </div>
 
-        <ul v-else>
-            <li
-                v-for="t in transactions" :key="t.id" class="border-b py-3 flex justify-between items-start">
+        <ul v-else class="divide-y divide-slate-200">
+            <li v-for="t in transactions" :key="t.id" class="flex items-center justify-between py-4">
                 <div>
-                    <div class="flex items-center gap-2 text-s">
-                        <span>{{ t.sender_id === user.id ? t.receiver?.name : t.sender?.name }}</span>
-                        <span
-                            :class="t.sender_id === user.id ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'"
-                            class="text-sm font-semibold px-2 py-0.5 rounded">
-                            {{ t.sender_id === user.id ? 'Sent' : 'Received' }}
+                    <div class="flex items-center gap-2 text-sm font-medium text-slate-900">
+                        <span>
+                            {{ t.sender_id === user.id ? t.receiver?.name : t.sender?.name }}
                         </span>
+                        <span
+                            :class="t.sender_id === user.id ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'"
+                            class="rounded-full px-2 py-0.5 text-xs font-medium">
+                            {{ t.sender_id === user.id ? 'Sent' : 'Received' }}
+                            </span>
                     </div>
 
-                    <div class="text-s text-gray-600 mt-1">
-                        Amount: ${{ t.amount }} {{ t.sender_id === user.id ? '(Fee: $' + t.commission_fee + ')' : '' }}
+                    <div class="mt-1 text-sm text-slate-500">
+                        Amount:
+                        <span class="font-medium text-slate-900">
+                            ${{ t.amount }}
+                        </span>
+                        <span v-if="t.sender_id === user.id" class="text-xs text-slate-400">
+                            (Fee: ${{ t.commission_fee }})
+                        </span>
                     </div>
                 </div>
 
-                <div class="text-s text-gray-500 whitespace-nowrap">
+                <div class="text-right text-xs text-slate-500 whitespace-nowrap">
                     {{ formatDate(t.created_at) }}
                 </div>
             </li>
         </ul>
     </div>
+
 </template>
 
 <script setup>

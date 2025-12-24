@@ -1,19 +1,71 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="max-w-md w-full p-6 bg-white rounded shadow">
-            <h2 class="text-2xl mb-4">Register</h2>
-            <alert v-if="errors && Object.keys(errors).length" :message="errors" type="error"/>
-            <form class="space-y-4" @submit.prevent="submit">
-                <input v-model="name" class="w-full p-2 border rounded" placeholder="Name"/>
-                <input v-model="email" class="w-full p-2 border rounded" placeholder="Email" type="email"/>
-                <input v-model="password" class="w-full p-2 border rounded" placeholder="Password" type="password"/>
-                <input v-model="password_confirmation" class="w-full p-2 border rounded"
-                       placeholder="Confirm Password" type="password"/>
-                <div class="flex justify-between items-center">
-                    <button :disabled="loading" class="px-4 py-2 bg-blue-600 text-white rounded">
-                        {{ loading ? "Please wait..." : "Register" }}
-                    </button>
-                    <router-link class="text-sm text-blue-600" to="/login">Already Registered?</router-link>
+    <div class="min-h-screen flex items-center justify-center bg-slate-50">
+        <div class="w-full max-w-md rounded-md bg-white p-8 shadow-xl shadow-slate-200/60">
+            <h2 class="text-2xl font-semibold text-slate-900">
+                Create your account
+            </h2>
+            <p class="mt-1 text-sm text-slate-500">
+                Sign up to get started
+            </p>
+
+            <alert
+                v-if="errors && Object.keys(errors).length"
+                :message="errors"
+                class="mt-4"
+                type="error"/>
+
+            <!-- Form -->
+            <form class="mt-6 space-y-4" @submit.prevent="submit">
+                <input
+                    v-model="name"
+                    class="w-full rounded-md border border-slate-300 bg-slate-50
+                         px-4 py-2.5 text-sm
+                         focus:border-blue-600 focus:ring-4
+                         focus:ring-blue-600/20 outline-none"
+                    placeholder="Full name"/>
+
+                <input
+                    v-model="email"
+                    class="w-full rounded-md border border-slate-300 bg-slate-50
+                         px-4 py-2.5 text-sm
+                         focus:border-blue-600 focus:ring-4
+                         focus:ring-blue-600/20 outline-none"
+                    placeholder="Email address"
+                    type="email"/>
+
+                <input
+                    v-model="password"
+                    class="w-full rounded-md border border-slate-300 bg-slate-50
+                         px-4 py-2.5 text-sm
+                         focus:border-blue-600 focus:ring-4
+                         focus:ring-blue-600/20 outline-none"
+                    placeholder="Password"
+                    type="password"/>
+
+                <input
+                    v-model="password_confirmation"
+                    class="w-full rounded-md border border-slate-300 bg-slate-50
+                         px-4 py-2.5 text-sm
+                         focus:border-blue-600 focus:ring-4
+                         focus:ring-blue-600/20 outline-none"
+                    placeholder="Confirm password"
+                    type="password"/>
+
+                <button
+                    :disabled="loading"
+                    class="w-full rounded-md bg-gradient-to-r
+                           from-blue-600 to-blue-700
+                           px-4 py-2 text-sm font-medium
+                           text-white shadow-md transition
+                           hover:opacity-95 disabled:opacity-60">
+                    {{ loading ? "Creating account..." : "Register" }}
+                </button>
+
+                <div class="text-center text-sm text-slate-600">
+                    Already have an account?
+                    <router-link class="font-medium text-blue-600 hover:underline" to="/login">
+                        Sign in
+                    </router-link>
                 </div>
             </form>
         </div>

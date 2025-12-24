@@ -1,16 +1,54 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="max-w-md w-full p-6 bg-white rounded shadow">
-            <h2 class="text-2xl mb-4">Forgot Password</h2>
-            <alert v-if="message" :message="message" type="success"/>
-            <alert v-if="errors && Object.keys(errors).length" :message="errors" type="error"/>
-            <input v-model="email" class="border p-2 mb-2 w-full" placeholder="Email"/>
+    <div class="min-h-screen flex items-center justify-center bg-slate-50">
+        <div
+            class="w-full max-w-md rounded-md bg-white p-8 shadow-xl shadow-slate-200/60">
+            <h2 class="text-2xl font-semibold text-slate-900">
+                Forgot password?
+            </h2>
+            <p class="mt-1 text-sm text-slate-500">
+                We’ll email you a link to reset your password
+            </p>
 
-            <div class="flex justify-between items-center">
-                <button :disabled="loading" class="bg-blue-600 text-white px-4 py-2 rounded" @click="submit">
-                    {{ loading ? "Please wait..." : "Send Reset Link" }}
+            <alert
+                v-if="message"
+                :message="message"
+                class="mt-4"
+                type="success"/>
+
+            <alert
+                v-if="errors && Object.keys(errors).length"
+                :message="errors"
+                class="mt-4"
+                type="error"/>
+
+            <input
+                v-model="email"
+                class="mt-6 w-full rounded-md border border-slate-300 bg-slate-50
+                       px-4 py-2.5 text-sm
+                       focus:border-blue-600 focus:ring-4
+                       focus:ring-blue-600/20 outline-none"
+                placeholder="Email address"
+                type="email"/>
+
+            <div class="mt-6 space-y-4">
+                <button
+                    :disabled="loading"
+                    class="w-full rounded-md bg-gradient-to-r
+                           from-blue-600 to-blue-700
+                           px-4 py-2 text-sm font-medium
+                           text-white shadow-md transition
+                           hover:opacity-95 disabled:opacity-60"
+                    @click="submit">
+                    {{ loading ? "Sending link..." : "Send reset link" }}
                 </button>
-                <router-link class="text-sm text-blue-600" to="/login">Back to Login</router-link>
+
+                <div class="text-center">
+                    <router-link
+                        class="text-sm text-blue-600 hover:underline"
+                        to="/login">
+                        Back to login
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>

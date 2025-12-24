@@ -1,12 +1,31 @@
 <template>
-    <div class="h-100 not-found">
-        <b>404 - Page Not Found</b>
-        <p class="mt-2 mb-5">The page you are looking for does not exist.</p>
+    <div class="min-h-screen flex items-center justify-center bg-slate-50">
+        <div class="text-center w-full max-w-md rounded-md bg-white p-8 shadow-xl shadow-slate-200/60">
+            <h1 class="text-6xl font-bold text-blue-600">
+                404
+            </h1>
 
-        <router-link class="px-3 py-1 bg-blue-500 text-white rounded" to="/">
-            Go back to Home
-        </router-link>
+            <h2 class="mt-2 text-xl font-semibold text-slate-900">
+                Page not found
+            </h2>
+
+            <p class="mt-2 text-sm text-slate-500">
+                The page you’re looking for doesn’t exist or has been moved.
+            </p>
+
+            <div class="mt-6">
+                <router-link class="inline-flex items-center justify-center
+                           rounded-md bg-gradient-to-r
+                           from-blue-600 to-blue-700
+                           px-5 py-2.5 text-sm font-medium text-white
+                           shadow-md transition hover:opacity-95"
+                             to="/">
+                    Go back home
+                </router-link>
+            </div>
+        </div>
     </div>
+
 </template>
 
 <style scoped>
