@@ -9,14 +9,14 @@
 
         <form class="space-y-4" @submit.prevent="submit">
             <div class="relative">
-                <label class="mb-1 block text-xs font-medium text-slate-500">
+                <label class="mb-1 block text-xs font-medium text-slate-600">
                     Recipient
                 </label>
 
                 <input
                     v-model="search"
                     autocomplete="off"
-                    class="w-full rounded-md border border-slate-300 bg-slate-50
+                    class="w-full rounded-md border border-slate-300
                            px-3 py-2 text-sm
                            focus:border-blue-600 focus:ring-4
                            focus:ring-blue-600/20 outline-none"
@@ -31,7 +31,7 @@
                         <div class="font-medium text-slate-900">
                             {{ user.name }}
                         </div>
-                        <div class="text-xs text-slate-500">
+                        <div class="text-xs text-slate-600">
                             {{ user.email }}
                         </div>
                     </li>
@@ -41,13 +41,13 @@
             <input :value="receiver_id" type="hidden"/>
 
             <div>
-                <label class="mb-1 block text-xs font-medium text-slate-500">
+                <label class="mb-1 block text-xs font-medium text-slate-600">
                     Amount
                 </label>
 
                 <input
                     v-model="amount"
-                    class="w-full rounded-md border border-slate-300 bg-slate-50
+                    class="w-full rounded-md border border-slate-300
                            px-3 py-2 text-sm
                            focus:border-blue-600 focus:ring-4
                            focus:ring-blue-600/20 outline-none"
@@ -58,11 +58,17 @@
 
             <div class="flex justify-end">
                 <button :disabled="loading || !receiver_id || !amount"
-                        class="rounded-md bg-gradient-to-r
+                        class="flex items-center gap-2 rounded-md bg-gradient-to-r
                            from-blue-600 to-blue-700
                            px-4 py-2 text-sm font-medium
                            text-white shadow-md transition
                            hover:opacity-95 disabled:opacity-60">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-4 w-4"
+                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M7 17L17 7m0 0H7m10 0v10" />
+                    </svg>
                     {{ loading ? "Sending..." : "Send money" }}
                 </button>
             </div>

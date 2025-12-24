@@ -1,20 +1,24 @@
 <template>
-    <div class="min-h-screen bg-slate-50">
+    <div class="bg-slate-50">
         <div class="max-w-5xl mx-auto px-6 py-6">
             <div class="flex items-center justify-between mb-8">
                 <div>
                     <h1 class="text-2xl font-semibold text-slate-900">Dashboard</h1>
-                    <p class="text-sm text-slate-500">
+                    <p class="text-sm text-slate-600">
                         Welcome back, {{ user?.name }}
                     </p>
                 </div>
 
-                <button class="rounded-md bg-red-500
-                           from-red-600 to-red-700
-                           px-4 py-2 text-sm font-medium
-                           text-white shadow-md transition
-                           hover:opacity-95 disabled:opacity-60"
+                <button class="flex items-center gap-2 rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700
+                      transition-all duration-200 hover:border-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 hover:text-white"
                         @click="logout">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6 A2.25 2.25 0 005.25 5.25v13.5 A2.25 2.25 0 007.5 21h6 a2.25 2.25 0 002.25-2.25V15 M18 12h-9m0 0l3-3m-3 3l3 3"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"/>
+                    </svg>
                     Logout
                 </button>
             </div>
@@ -25,7 +29,7 @@
                 <template v-if="user?.email_verified_at">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <div class="md:col-span-2 rounded-md bg-white p-6 shadow">
-                            <h2 class="text-sm font-medium text-slate-500">
+                            <h2 class="text-sm font-medium text-slate-600">
                                 Current balance
                             </h2>
 
@@ -39,7 +43,7 @@
                         </div>
 
                         <div class="rounded-md bg-white p-6 shadow">
-                            <h2 class="text-sm font-medium text-slate-500 mb-3">
+                            <h2 class="text-sm font-medium text-slate-600 mb-3">
                                 Quick transfer
                             </h2>
                             <transfer-form @done="refresh"/>
@@ -54,14 +58,9 @@
                         <transactions-list :transactions="transactions" :user="user"/>
 
                         <div v-if="page < lastPage" class="mt-6 flex justify-center">
-                            <button
-                                :disabled="loading"
-                                class="rounded-md bg-gradient-to-r
-                           from-blue-600 to-blue-700
-                           px-4 py-2 text-sm font-medium
-                           text-white shadow-md transition
-                           hover:opacity-95 disabled:opacity-60"
-                                @click="loadMore">
+                            <button :disabled="loading"
+                                    class="rounded-md bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-2 text-sm font-medium text-white shadow-md transition hover:opacity-95 disabled:opacity-60"
+                                    @click="loadMore">
                                 {{ loading ? "Loading..." : "Load more" }}
                             </button>
                         </div>
@@ -86,7 +85,7 @@ import TransferForm from '../components/TransferForm.vue';
 import TransactionsList from '../components/TransactionsList.vue';
 import {makeEcho} from '../plugins/echo.js';
 import Alert from '../components/Alert.vue';
-import AddBalance from "../components/AddBalance.vue";
+import AddBalance from '../components/AddBalance.vue';
 
 const balance = ref('0.00');
 const transactions = ref([]);

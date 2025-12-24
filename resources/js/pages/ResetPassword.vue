@@ -1,12 +1,12 @@
 <template>
     <template>
-        <div class="min-h-screen flex items-center justify-center bg-slate-50">
+        <div class="flex items-center justify-center bg-slate-50">
             <div
                 class="w-full max-w-md rounded-md bg-white p-8 shadow-xl shadow-slate-200/60">
                 <h2 class="text-2xl font-semibold text-slate-900">
                     Reset your password
                 </h2>
-                <p class="mt-1 text-sm text-slate-500">
+                <p class="mt-1 text-sm text-slate-600">
                     Enter a new password for your account
                 </p>
 
@@ -25,7 +25,7 @@
 
                 <input
                     v-model="password"
-                    class="mt-6 w-full rounded-md border border-slate-300 bg-slate-50
+                    class="mt-6 w-full rounded-md border border-slate-300
                        px-4 py-2.5 text-sm
                        focus:border-blue-600 focus:ring-4
                        focus:ring-blue-600/20 outline-none"
@@ -35,7 +35,7 @@
 
                 <input
                     v-model="password_confirmation"
-                    class="mt-4 w-full rounded-md border border-slate-300 bg-slate-50
+                    class="mt-4 w-full rounded-md border border-slate-300
                        px-4 py-2.5 text-sm
                        focus:border-blue-600 focus:ring-4
                        focus:ring-blue-600/20 outline-none"

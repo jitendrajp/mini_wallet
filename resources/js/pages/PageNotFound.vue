@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center bg-slate-50">
+    <div class="flex items-center justify-center bg-slate-50">
         <div class="text-center w-full max-w-md rounded-md bg-white p-8 shadow-xl shadow-slate-200/60">
             <h1 class="text-6xl font-bold text-blue-600">
                 404
@@ -9,7 +9,7 @@
                 Page not found
             </h2>
 
-            <p class="mt-2 text-sm text-slate-500">
+            <p class="mt-2 text-sm text-slate-600">
                 The page you’re looking for doesn’t exist or has been moved.
             </p>
 
