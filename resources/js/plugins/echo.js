@@ -1,7 +1,7 @@
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
+import Echo from 'laravel-echo'
+import Pusher from 'pusher-js'
 
-window.Pusher = Pusher;
+window.Pusher = Pusher
 
 export function makeEcho(token) {
     return new Echo({
@@ -13,8 +13,8 @@ export function makeEcho(token) {
         auth: {
             headers: {
                 Authorization: `Bearer ${token}`,
-                Accept: 'application/json'
-            }
-        }
+                Accept: 'application/json',
+            },
+        },
     })
 }

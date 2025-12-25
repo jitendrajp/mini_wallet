@@ -1,9 +1,19 @@
-import {createApp} from 'vue';
-import App from './layouts/App.vue';
-import router from './router/router.js';
-import {setToken} from './plugins/api.js';
-import '../css/app.css';
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router/router'
+import { setToken } from './plugins/api'
+import '../css/app.css'
 
-const token = localStorage.getItem('token');
-if (token) setToken(token);
-createApp(App).use(router).mount('#app');
+initializeAuth()
+
+createApp(App)
+    .use(router)
+    .mount('#app')
+
+function initializeAuth() {
+    const token = localStorage.getItem('token')
+
+    if (token) {
+        setToken(token)
+    }
+}
