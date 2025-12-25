@@ -9,7 +9,7 @@ This README provides full setup instructions, environment configuration details 
 ## Features
 - User Authentication (Login, User registration with email verification, Forgot Password, Logout)
 - Balance Management (Add Balance)
-- Send Money using Recipient User ID (id of the users table)
+- Send Money selecting Recipient User (Searable with Name or Email address)
 - Redis Queue Support
 - JWT Authentication
 - Pusher Integration
@@ -62,7 +62,7 @@ http://13.61.248.128
 |----------|--------------|
 | PHP | 8.2+         |
 | Composer | Latest       |
-| MySQL | 5.7+ / MariaDB |
+| PostgreSQL | 18+ |
 | Redis | Latest       |
 | Node.js | 22 or higher |
 | npm | 10 or higher |
