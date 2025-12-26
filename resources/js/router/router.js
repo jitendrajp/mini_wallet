@@ -23,8 +23,9 @@ const routes = [
             },
             { path: 'login', component: Login, meta: { guestOnly: true } },
             { path: 'register', component: Register, meta: { guestOnly: true } },
-            { path: 'forgot-password', component: ForgotPassword },
-            { path: 'reset-password', component: ResetPassword },
+            { path: 'forgot-password', component: ForgotPassword, meta: { guestOnly: true }  },
+            { path: 'reset-password', component: ResetPassword, meta: { guestOnly: true }  },
+            { path: 'email-status', component: EmailStatus},
             {
                 path: ':pathMatch(.*)*',
                 name: 'NotFound',
@@ -37,8 +38,7 @@ const routes = [
         path: '/',
         component: DashboardLayout,
         children: [
-            { path: 'dashboard', component: Dashboard, meta: { requiresAuth: true } },
-            { path: 'email-status', component: EmailStatus, meta: { requiresAuth: true } },
+            { path: 'dashboard', component: Dashboard, meta: { requiresAuth: true } }
         ],
     },
 ]
