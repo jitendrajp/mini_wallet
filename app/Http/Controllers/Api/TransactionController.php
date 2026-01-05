@@ -70,7 +70,10 @@ class TransactionController extends Controller
                 'status' => 'completed',
             ]);
             DB::commit();
-            event(new TransactionCompleted($tx));
+
+            DB::afterCommit(function () use ($tx) {
+                event(new TransactionCompleted($tx));
+            });
             return response()->json(['transaction' => $tx, 'balance' => $sender->balance]);
         } catch (Exception $e) {
             DB::rollBack();
