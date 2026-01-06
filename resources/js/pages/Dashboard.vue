@@ -188,7 +188,7 @@ onMounted(async () => {
     window.Echo = echo
 
     echo.private(`user.${data.id}`)
-        .listen('TransactionCompleted', (e) => {
+        .listen('.TransactionCompleted', (e) => {
             const tx = e?.transaction
             if (!tx || hasTransaction(tx.id)) return
 

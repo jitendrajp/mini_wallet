@@ -19,6 +19,11 @@ class TransactionCompleted implements ShouldBroadcast
         $this->transaction = $transaction->load(['sender', 'receiver']);
     }
 
+    public function broadcastAs()
+    {
+        return 'TransactionCompleted';
+    }
+
     public function broadcastOn()
     {
         return [
